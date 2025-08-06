@@ -1,0 +1,55 @@
+.footer {
+    background-color: var(--dark-color);
+    color: #a0aec0; /* हल्का ग्रे टेक्स्ट */
+    padding: 3rem 1.5rem 1.5rem 1.5rem;
+    margin-top: 2rem;
+}
+
+.footer-content {
+    display: grid;
+    /* डेस्कटॉप पर 4 कॉलम, मोबाइल पर 1 या 2 कॉलम */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #4a5568;
+}
+
+.footer-section h4 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.footer-section p, .footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-section a {
+    color: #a0aec0;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-section a:hover {
+    color: white;
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 1.5rem;
+    font-size: 0.9rem;
+}

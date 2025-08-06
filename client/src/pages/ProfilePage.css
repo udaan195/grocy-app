@@ -1,0 +1,89 @@
+.profile-page {
+    max-width: 800px;
+    margin: 1rem auto;
+    padding: 1rem;
+}
+
+.profile-welcome-card {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.profile-welcome-details h3 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1.4rem;
+}
+
+.profile-welcome-details p, .profile-welcome-details span {
+    margin: 0;
+    color: #555;
+}
+
+.profile-action-prompt {
+    background-color: #e6fffa;
+    border: 1px solid #b2f5ea;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.saved-addresses-container, .address-form-container {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.saved-addresses-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.address-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.form-row > * {
+    flex: 1;
+}
+
+.address-card {
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.address-card p {
+    margin: 0.25rem 0;
+}
+
+.address-actions {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 1.1rem;
+}

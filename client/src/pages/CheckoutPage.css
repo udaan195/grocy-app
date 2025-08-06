@@ -1,0 +1,110 @@
+.checkout-page {
+    max-width: 800px;
+    margin: 1rem auto;
+    padding: 1rem;
+}
+
+.checkout-page h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.checkout-section {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.checkout-section h3 {
+    margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #eee;
+    font-size: 1.2rem;
+}
+
+.address-list .address-card {
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    border: 2px solid #eee;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+}
+
+.address-list .address-card.selected {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.3);
+}
+
+.payment-options .payment-option {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.payment-options .payment-option.selected {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.3);
+}
+
+.payment-options input[type="radio"] {
+    margin-right: 15px;
+    width: auto;
+    accent-color: var(--primary-color);
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.summary-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.summary-details {
+    flex-grow: 1;
+}
+
+.summary-details p {
+    margin: 0;
+}
+
+.summary-price {
+    font-weight: 600;
+}
+
+.summary-totals .summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.summary-totals .grand-total {
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.place-order-btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+}

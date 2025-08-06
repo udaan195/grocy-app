@@ -1,0 +1,62 @@
+.manage-orders-page {
+    max-width: 900px;
+    margin: 1rem auto;
+    padding: 1rem;
+}
+
+.order-filters {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.filter-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.order-card-vendor {
+    background-color: #fff;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+
+.order-card-header {
+    padding: 1rem 1.5rem;
+    background-color: #f7fafc;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #eee;
+}
+
+.order-card-body {
+    padding: 1.5rem;
+}
+
+.order-card-body p {
+    margin: 0.25rem 0 1rem 0;
+}
+
+.status-updater-vendor {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    flex-wrap: wrap; /* मोबाइल पर नीचे आ जाएगा */
+    gap: 1rem;
+    align-items: center;
+}

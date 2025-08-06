@@ -1,0 +1,106 @@
+.vendor-management-page {
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.vendor-management-page h1 {
+  margin-bottom: 1.5rem;
+}
+
+/* 🔹 Filter Buttons Container */
+.filter-controls {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+/* 🔹 All Filter Buttons */
+.filter-btn {
+  background-color: white;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.filter-btn:hover {
+  background-color: var(--light-gray);
+}
+
+/* 🔹 Active Filter Button */
+.filter-btn.active {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+/* 🔹 Vendor Card */
+.vendor-card {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.vendor-card h4 {
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.vendor-card p {
+  margin-bottom: 0.25rem;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* 🔹 Vendor Status Tag */
+.vendor-card .status {
+  font-weight: bold;
+  text-transform: capitalize;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background-color: #eee;
+  font-size: 0.85rem;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+/* 🔹 Action Buttons (Edit/Delete/etc.) */
+.vendor-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.vendor-actions button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.vendor-actions .approve-btn {
+  background-color: #38a169;
+  color: white;
+}
+
+.vendor-actions .reject-btn {
+  background-color: #e53e3e;
+  color: white;
+}
+
+.vendor-actions .edit-btn {
+  background-color: #3182ce;
+  color: white;
+}

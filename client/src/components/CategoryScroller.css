@@ -1,0 +1,56 @@
+.category-scroller {
+    display: flex;
+    overflow-x: auto;
+    gap: 0.75rem; /* चिप्स के बीच में स्पेस */
+    background-color: #ffffff;
+    padding: 0.75rem; /* ऊपर-नीचे और साइड में पैडिंग */
+    border-bottom: 1px solid #e2e8f0; /* नीचे की लाइन */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.category-scroller {
+    display: flex;
+    overflow-x: auto;
+    gap: 0.75rem;
+    background-color: #ffffff;
+    padding: 0.75rem;
+    border-bottom: 1px solid #e2e8f0;
+
+    /* --- यह नई स्टाइल जोड़ें --- */
+    position: sticky;
+    top: 70px; /* हेडर की ऊंचाई के ठीक नीचे (हेडर की ऊंचाई लगभग 70px है) */
+    z-index: 999; /* ताकि यह बाकी कंटेंट के ऊपर रहे */
+    /* -------------------------- */
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* ... बाकी CSS वैसी ही रहेगी ... */
+
+/* हर एक कैटेगरी चिप की स्टाइल */
+.category-chip {
+    display: inline-block;
+    padding: 0.5rem 1rem; /* टेक्स्ट के चारों ओर स्पेस */
+    background-color: var(--light-gray);
+    border: 1px solid var(--border-color);
+    border-radius: 20px; /* गोल किनारे */
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap; /* नाम को एक लाइन में रखता है */
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.category-chip:hover {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+.category-chip.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}

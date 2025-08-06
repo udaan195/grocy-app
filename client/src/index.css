@@ -1,0 +1,69 @@
+/* Google Fonts से Montserrat फॉन्ट इम्पोर्ट करें */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+/* CSS वैरिएबल्स (पूरी ऐप में एक जैसे कलर्स के लिए) */
+:root {
+    --primary-color: #48bb78; /* हरा */
+    --secondary-color: #f57f17; /* नारंगी */
+    --dark-color: #1a202c;    /* हेडर का डार्क कलर */
+    --text-color: #2d3748;   /* गहरा ग्रे टेक्स्ट */
+    --light-gray: #f0f2f5;   /* हल्का ग्रे बैकग्राउंड */
+    --border-color: #cbd5e0;  /* बॉर्डर का कलर */
+}
+
+/* बेसिक CSS रीसेट */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #eef2f5; /* नया, थोड़ा गहरा बैकग्राउंड कलर */
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+main {
+    padding: 0.75rem; /* साइड के गैप को थोड़ा कम कर दिया */
+}
+
+/* सभी इनपुट और बटन के लिए बेहतर स्टाइल */
+input, select, textarea {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    width: 100%;
+    transition: border-color 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(72, 187, 120, 0.2);
+}
+
+button {
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    padding: 0.75rem 1.5rem;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #38a169; /* थोड़ा गहरा हरा */
+}
+
+button:disabled {
+    background-color: #a0aec0;
+    cursor: not-allowed;
+}

@@ -1,0 +1,64 @@
+.admin-products-page {
+    max-width: 900px;
+    margin: 1rem auto;
+    padding: 1rem;
+}
+
+.admin-products-page h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.vendor-group {
+    margin-bottom: 2.5rem;
+}
+
+.vendor-group-header {
+    background-color: var(--light-gray);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.product-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #eee;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 8px;
+}
+
+.product-info {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.product-info img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.product-info h4 {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.product-info p {
+    margin: 0;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.product-actions {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    font-size: 1.1rem;
+}
