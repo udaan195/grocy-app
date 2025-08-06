@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../api.js';
 import { Link } from 'react-router-dom';
 import { FaEdit, FaTrash, FaUserCircle } from 'react-icons/fa';
 import './ProfilePage.css';

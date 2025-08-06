@@ -1,7 +1,7 @@
 // imports (same as before, कोई बदलाव नहीं)
 import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext.jsx';
-import axios from 'axios';
+import axios from '../api.js';
 import { useNavigate, Link } from 'react-router-dom';
 import { haversineDistance } from '../utils/distanceHelper.js';
 import './CheckoutPage.css';

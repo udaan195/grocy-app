@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../api.js';
 import Loader from '../components/Loader.jsx'; // <-- Import Loader
 
 const RegisterPage = () => {

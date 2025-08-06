@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../api.js';
 import { Link } from 'react-router-dom'; // ✅ Link import किया गया
 import Loader from '../components/Loader.jsx';
 import './DashboardPages.css';

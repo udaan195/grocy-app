@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../api.js';
 import Loader from '../../components/Loader.jsx';
 import './ManageCouponsPage.css';
 

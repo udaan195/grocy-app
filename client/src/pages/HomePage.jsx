@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../api.js';
 import ProductCard from '../components/ProductCard.jsx';
 import CategoryScroller from '../components/CategoryScroller.jsx';
 import Loader from '../components/Loader.jsx';

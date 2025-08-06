@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../api.js';
 import { useCart } from '../context/CartContext.jsx';
 import Loader from '../components/Loader.jsx';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
