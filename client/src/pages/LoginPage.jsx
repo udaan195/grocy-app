@@ -18,7 +18,7 @@ const LoginPage = () => {
         setLoading(true);
         setError('');
         try {
-            const { data } = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+            const { data } = await axios.post('https://grocy-app-server.onrender.com/api/auth/login', { email, password });
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
             window.location.href = '/';
@@ -33,7 +33,7 @@ const LoginPage = () => {
         setLoading(true);
         setError('');
         try {
-            await axios.post('http://localhost:5000/api/auth/send-otp', { email });
+            await axios.post('https://grocy-app-server.onrender.com/api/auth/send-otp', { email });
             setIsOtpSent(true);
             setError('OTP has been sent to your email.');
         } catch (err) {
@@ -47,7 +47,7 @@ const LoginPage = () => {
         setLoading(true);
         setError('');
         try {
-            const { data } = await axios.post('http://localhost:5000/api/auth/verify-otp', { email, otp });
+            const { data } = await axios.post('https://grocy-app-server.onrender.com/api/auth/verify-otp', { email, otp });
 
             if (data.profileComplete === false) {
                 localStorage.setItem('tempToken', data.tempToken);

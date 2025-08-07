@@ -22,7 +22,7 @@ const DashboardPage = () => {
         }
 
         // 2. API call karo, aur header mein token bhejo
-        const response = await axios.get('http://your-api-url.com/api/user/me', {
+        const response = await axios.get('https://grocy-app-server.onrender.com/api/user/me', {
           headers: {
             'Authorization': `Bearer ${token}`
           }

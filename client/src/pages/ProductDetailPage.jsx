@@ -40,7 +40,7 @@ const ProductDetailPage = () => {
   const fetchProduct = async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`http://localhost:5000/api/products/${productId}`);
+      const { data } = await axios.get(`https://grocy-app-server.onrender.com/api/products/${productId}`);
       setProduct(data.product);
       setRelatedProducts(data.relatedProducts);
       setReviews(data.product.reviews || []);
@@ -62,7 +62,7 @@ const ProductDetailPage = () => {
 
     try {
       await axios.post(
-        `http://localhost:5000/api/products/${productId}/review`,
+        `https://grocy-app-server.onrender.com/api/products/${productId}/review`,
         { rating, comment },
         { headers: { Authorization: `Bearer ${token}` } }
       );

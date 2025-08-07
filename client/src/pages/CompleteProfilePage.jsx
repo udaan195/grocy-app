@@ -12,7 +12,7 @@ const CompleteProfilePage = () => {
             const tempToken = localStorage.getItem('tempToken');
             const config = { headers: { Authorization: `Bearer ${tempToken}` } };
 
-            const { data } = await axios.put('http://localhost:5000/api/users/complete-profile', { name, phoneNumber }, config);
+            const { data } = await axios.put('https://grocy-app-server.onrender.com/api/users/complete-profile', { name, phoneNumber }, config);
 
             // नया परमानेंट टोकन और यूजर जानकारी सेव करें
             localStorage.setItem('token', data.token);

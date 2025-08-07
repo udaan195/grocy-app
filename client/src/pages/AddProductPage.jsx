@@ -41,7 +41,7 @@ const AddProductPage = () => {
         try {
             const token = localStorage.getItem('token');
             const config = { headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` } };
-            await axios.post('http://localhost:5000/api/products', productData, config);
+            await axios.post('https://grocy-app-server.onrender.com/api/products', productData, config);
             alert('Product added successfully!');
             navigate('/vendor/products');
         } catch (err) {

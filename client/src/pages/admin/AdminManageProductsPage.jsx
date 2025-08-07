@@ -15,7 +15,7 @@ const AdminManageProductsPage = () => {
     const fetchProducts = async () => {
         try {
             const config = { headers: { Authorization: `Bearer ${getToken()}` } };
-            const { data } = await axios.get('http://localhost:5000/api/admin/products', config);
+            const { data } = await axios.get('https://grocy-app-server.onrender.com/api/admin/products', config);
             setProducts(data);
         } catch (error) {
             console.error("Failed to fetch products", error);
@@ -46,7 +46,7 @@ const AdminManageProductsPage = () => {
         if (window.confirm('Are you sure you want to delete this product permanently?')) {
             try {
                 const config = { headers: { Authorization: `Bearer ${getToken()}` } };
-                await axios.delete(`http://localhost:5000/api/admin/products/${productId}`, config);
+                await axios.delete(`https://grocy-app-server.onrender.com/api/admin/products/${productId}`, config);
                 fetchProducts(); // डिलीट करने के बाद लिस्ट को रिफ्रेश करें
             } catch (error) {
                 alert('Failed to delete product.');

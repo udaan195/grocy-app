@@ -58,7 +58,7 @@ const BecomeVendorPage = () => {
                 }
             };
 
-            await axios.post('http://localhost:5000/api/vendors/register', formData, config);
+            await axios.post('https://grocy-app-server.onrender.com/api/vendors/register', formData, config);
 
             alert('Congratulations! You are now a vendor. Please login again to see changes.');
             localStorage.removeItem('token'); // टोकन हटाकर दोबारा लॉगिन करने के लिए कहें

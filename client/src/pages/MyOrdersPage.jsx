@@ -17,7 +17,7 @@ const MyOrdersPage = () => {
                 setUser(userInfo);
 
                 const config = { headers: { Authorization: `Bearer ${token}` } };
-                const { data } = await axios.get('http://localhost:5000/api/orders/myorders', config);
+                const { data } = await axios.get('https://grocy-app-server.onrender.com/api/orders/myorders', config);
                 setOrders(data);
             } catch (error) {
                 console.error("Failed to fetch orders");

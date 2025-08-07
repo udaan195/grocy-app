@@ -73,7 +73,7 @@ const HomePage = ({ searchTerm }) => {
                 const { lat, lon } = userLocation;
 
                 const productsRes = await axios.get(
-                    `http://localhost:5000/api/products?lat=${lat}&lon=${lon}&radius=10&category=${selectedCategory}&search=${searchTerm}`
+                    `https://grocy-app-server.onrender.com/api/products?lat=${lat}&lon=${lon}&radius=10&category=${selectedCategory}&search=${searchTerm}`
                 );
 
                 setProducts(productsRes.data);

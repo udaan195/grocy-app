@@ -26,7 +26,7 @@ const ManageVendorsPage = () => {
         setLoading(true);
         try {
             const config = { headers: { Authorization: `Bearer ${getToken()}` } };
-            const url = `http://localhost:5000/api/admin/vendors?status=${filter}`;
+            const url = `https://grocy-app-server.onrender.com/api/admin/vendors?status=${filter}`;
             const { data } = await axios.get(url, config);
             setVendors(data);
         } catch (error) {
@@ -44,7 +44,7 @@ const ManageVendorsPage = () => {
         if (window.confirm(`Are you sure you want to ${newStatus} this vendor?`)) {
             try {
                 const config = { headers: { Authorization: `Bearer ${getToken()}` } };
-                await axios.put(`http://localhost:5000/api/admin/vendors/${vendorId}/status`, { status: newStatus }, config);
+                await axios.put(`https://grocy-app-server.onrender.com/api/admin/vendors/${vendorId}/status`, { status: newStatus }, config);
                 fetchVendors();
             } catch (error) {
                 alert('Failed to update status.');
@@ -70,7 +70,7 @@ const ManageVendorsPage = () => {
     const handleSave = async (vendorId) => {
         try {
             const config = { headers: { Authorization: `Bearer ${getToken()}` } };
-            await axios.put(`http://localhost:5000/api/admin/vendors/${vendorId}/status`, editData, config);
+            await axios.put(`https://grocy-app-server.onrender.com/api/admin/vendors/${vendorId}/status`, editData, config);
             setEditingVendorId(null);
             fetchVendors();
             alert('Vendor details updated!');

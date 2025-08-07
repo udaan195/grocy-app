@@ -20,7 +20,7 @@ const ManageProductsPage = () => {
                     },
                 };
                 const { data } = await axios.get(
-                    'http://localhost:5000/api/products/myproducts',
+                    'https://grocy-app-server.onrender.com/api/products/myproducts',
                     config
                 );
                 setProducts(data);
@@ -44,11 +44,11 @@ const ManageProductsPage = () => {
                 };
                 setLoading(true);
                 await axios.delete(
-                    `http://localhost:5000/api/products/${productId}`,
+                    `https://grocy-app-server.onrender.com/api/products/${productId}`,
                     config
                 );
                 const { data } = await axios.get(
-                    'http://localhost:5000/api/products/myproducts',
+                    'https://grocy-app-server.onrender.com/api/products/myproducts',
                     config
                 );
                 setProducts(data);

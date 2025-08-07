@@ -14,7 +14,7 @@ const RegisterPage = () => {
         e.preventDefault();
         setLoading(true); // Show loader
         try {
-            const { data } = await axios.post('http://localhost:5000/api/auth/register', formData);
+            const { data } = await axios.post('https://grocy-app-server.onrender.com/api/auth/register', formData);
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
             navigate('/');

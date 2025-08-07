@@ -11,7 +11,7 @@ const AdminManageOrdersPage = () => {
     const fetchOrders = async () => {
         try {
             const config = { headers: { Authorization: `Bearer ${getToken()}` } };
-            const { data } = await axios.get('http://localhost:5000/api/admin/orders', config);
+            const { data } = await axios.get('https://grocy-app-server.onrender.com/api/admin/orders', config);
             setOrders(data);
         } catch (error) {
             console.error("Failed to fetch orders", error);
@@ -44,7 +44,7 @@ const AdminManageOrdersPage = () => {
     const handleStatusChange = async (orderId, newStatus) => {
         try {
             const config = { headers: { Authorization: `Bearer ${getToken()}` } };
-            await axios.put(`http://localhost:5000/api/admin/orders/${orderId}/status`, { status: newStatus }, config);
+            await axios.put(`https://grocy-app-server.onrender.com/api/admin/orders/${orderId}/status`, { status: newStatus }, config);
             fetchOrders(); // लिस्ट को रिफ्रेश करें
         } catch (error) {
             alert('Failed to update order status.');

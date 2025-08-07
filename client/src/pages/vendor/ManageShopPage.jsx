@@ -11,7 +11,7 @@ const ManageShopPage = () => {
         const fetchShopDetails = async () => {
             try {
                 const config = { headers: { Authorization: `Bearer ${getToken()}` } };
-                const { data } = await axios.get('http://localhost:5000/api/vendors/myshop', config);
+                const { data } = await axios.get('https://grocy-app-server.onrender.com/api/vendors/myshop', config);
                 setShopDetails(data);
             } catch (error) {
                 console.error("Failed to fetch shop details", error);
@@ -30,7 +30,7 @@ const ManageShopPage = () => {
         e.preventDefault();
         try {
             const config = { headers: { Authorization: `Bearer ${getToken()}` } };
-            await axios.put('http://localhost:5000/api/vendors/myshop', shopDetails, config);
+            await axios.put('https://grocy-app-server.onrender.com/api/vendors/myshop', shopDetails, config);
             alert('Shop details updated successfully!');
         } catch (error) {
             alert('Failed to update details.');
