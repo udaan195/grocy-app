@@ -182,12 +182,27 @@ const forgotPassword = async (req, res) => {
         await user.save({ validateBeforeSave: false });
 
         // यहाँ ईमेल भेजने का लॉजिक आएगा
+ const transporter = nodemailer.createTransport({
+            host: process.env.EMAIL_HOST,
+            port: process.env.EMAIL_PORT,
+            auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
+        });
+        await transporter.sendMail({
+            from: `"Grocy App" <${process.env.SENDER_EMAIL}>`,
+            to: email,
+            subject: 'Your Password Reset OTP',
+            text: `Your One-Time Password (OTP) for resetting your password is: ${otp}. It is valid for 10 minutes.`,
+        });
+        // ---------------------------------------------
         
         res.json({ message: `Password reset OTP sent to ${email}` });
     } catch (error) {
+        console.error("Forgot Password Error:", error);
         res.status(500).json({ message: 'Server Error' });
     }
 };
+        
+        
 
 // @desc    Reset password with OTP
 // @route   POST /api/auth/reset-password
