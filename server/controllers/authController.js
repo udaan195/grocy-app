@@ -164,10 +164,60 @@ const verifyOtp = async (req, res) => {
         res.status(500).json({ message: 'Server Error' });
     }
 };
+// @desc    Forgot password - Send OTP
+// @route   POST /api/auth/forgot-password
+// @access  Public
+const forgotPassword = async (req, res) => {
+    try {
+        const { email } = req.body;
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User with this email does not exist.' });
+        }
+
+        const otp = Math.floor(100000 + Math.random() * 900000).toString();
+        user.otp = otp;
+        user.otpExpires = new Date(Date.now() + 10 * 60 * 1000); // 10 मिनट की वैधता
+        await user.save({ validateBeforeSave: false });
+
+        // यहाँ ईमेल भेजने का लॉजिक आएगा
+        
+        res.json({ message: `Password reset OTP sent to ${email}` });
+    } catch (error) {
+        res.status(500).json({ message: 'Server Error' });
+    }
+};
+
+// @desc    Reset password with OTP
+// @route   POST /api/auth/reset-password
+// @access  Public
+const resetPassword = async (req, res) => {
+    try {
+        const { email, otp, password } = req.body;
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found.' });
+        }
+        if (user.otp !== otp || user.otpExpires < Date.now()) {
+            return res.status(400).json({ message: 'Invalid or expired OTP.' });
+        }
+
+        user.password = password; // pre-save हुक अपने आप इसे हैश कर देगा
+        user.otp = null;
+        user.otpExpires = null;
+        await user.save();
+        
+        res.json({ message: 'Password reset successful!' });
+    } catch (error) {
+        res.status(500).json({ message: 'Server Error' });
+    }
+};
 
 module.exports = {
     registerUser,
     loginUser,
     sendOtp,
-    verifyOtp,
+    verifyOtp, forgotPassword, resetPassword
 };

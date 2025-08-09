@@ -25,6 +25,10 @@ router.post('/login', loginUser);
 
 // POST /api/auth/send-otp
 router.post('/send-otp', sendOtp);
+// ...
+router.post('/forgot-password', forgotPassword);
+router.post('/reset-password', resetPassword);
+// ...
 
 // POST /api/auth/verify-otp
 router.post('/verify-otp', verifyOtp);
