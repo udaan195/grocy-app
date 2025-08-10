@@ -231,5 +231,5 @@ module.exports = {
     getMyOrders,
     getVendorOrders,
     updateOrderStatusByVendor,
-    getOrderById,markOrderAsPaid
+    getOrderById, markOrderAsPaid
 };
