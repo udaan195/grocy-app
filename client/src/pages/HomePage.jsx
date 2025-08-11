@@ -69,6 +69,7 @@ const HomePage = ({ searchTerm }) => {
         const fetchData = async () => {
             setLoading(true);
             setError('');
+            const encodedCategory = encodeURIComponent(selectedCategory);
             try {
                 const { lat, lon } = userLocation;
 
