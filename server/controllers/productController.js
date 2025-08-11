@@ -22,7 +22,7 @@ const getProducts = async (req, res) => {
         const { lat, lon, category, search } = req.query;
         if (!lat || !lon) return res.status(400).json({ message: "Location is required." });
 
-        const maxDiscoveryRadius = 50 * 1000;
+        const maxDiscoveryRadius = 1000 * 1000;
         const allNearbyVendors = await Vendor.find({
             location: {
                 $nearSphere: {
