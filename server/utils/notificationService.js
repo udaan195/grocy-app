@@ -1,43 +1,47 @@
+// server/utils/notificationService.js
 require('dotenv').config();
 const TelegramBot = require('node-telegram-bot-api');
+const nodemailer = require('nodemailer');
 
-const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN);
-
-const sendTelegramNotification = async (chatId, message) => {
-    try {
-        await bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
-        console.log(`✅ Telegram message sent to ${chatId}`);
-    } catch (err) {
-        console.error(`❌ Failed to send Telegram message:`, err.message);
-    }
-};
-
-module.exports = { sendTelegramNotification };const nodemailer = require('nodemailer');
-const TelegramBot = require('node-telegram-bot-api');
-
-const sendOrderEmail = async (recipientEmail, subject, htmlContent) => { /* ... */ };
+const BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+let bot = null;
+if (BOT_TOKEN) {
+  bot = new TelegramBot(BOT_TOKEN, { polling: false }); // polling false for server-send only
+}
 
 const sendTelegramNotification = async (chatId, message) => {
-    try {
-        const botToken = process.env.TELEGRAM_BOT_TOKEN;
-        if (!botToken) {
-            console.error('❌ Error: TELEGRAM_BOT_TOKEN is not set in .env file.');
-            return;
-        }
-        
-        console.log(`Attempting to send Telegram message to Chat ID: ${chatId}`);
-        const bot = new TelegramBot(botToken);
-        await bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
-        console.log(`✅ Telegram notification sent successfully to Chat ID ${chatId}`);
-
-    } catch (error) {
-        console.error(`❌ FAILED to send Telegram message to ${chatId}.`);
-        if (error.response && error.response.body) {
-            console.error('Telegram API Error:', error.response.body.description);
-        } else {
-            console.error('General Telegram Error:', error.message);
-        }
-    }
+  if (!bot) return console.error('Telegram bot token not configured');
+  try {
+    await bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
+    console.log(`Telegram message sent to ${chatId}`);
+    return true;
+  } catch (err) {
+    console.error('Telegram send error:', err.response?.body || err.message || err);
+    return false;
+  }
 };
 
-module.exports = { sendOrderEmail, sendTelegramNotification };
+const sendOrderEmail = async (recipientEmail, subject, htmlContent) => {
+  try {
+    const transporter = nodemailer.createTransport({
+      host: process.env.EMAIL_HOST,
+      port: Number(process.env.EMAIL_PORT || 587),
+      secure: false,
+      auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
+    });
+
+    await transporter.sendMail({
+      from: `"Grocy App" <${process.env.SENDER_EMAIL}>`,
+      to: recipientEmail,
+      subject,
+      html: htmlContent,
+    });
+    console.log(`Email sent to ${recipientEmail}`);
+    return true;
+  } catch (err) {
+    console.error('Email send error:', err);
+    return false;
+  }
+};
+
+module.exports = { sendTelegramNotification, sendOrderEmail };

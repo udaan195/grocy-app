@@ -96,7 +96,7 @@ const placeOrder = async (req, res) => {
             
 
             // 📲 Telegram Notification (per vendor)
-            if (vendor?.telegramChatId) {
+            if (vendor?.telegramId) {
                 const itemLines = group.items.map((item, index) => {
                     return `${index + 1}. <b>${item.name}</b> - ${item.quantity} ${item.quantityValue}${item.quantityUnit} @ ₹${item.discountedPrice}`;
                 }).join('\n');
@@ -118,7 +118,7 @@ ${itemLines}
 ${appliedCoupon ? `<b>🎟 Coupon Applied:</b> ${appliedCoupon}` : ''}
                 `.trim();
 
-                await sendTelegramNotification(vendor.telegramChatId, message);
+                await sendTelegramNotification(vendor.telegramId, message);
             }
         }
 
