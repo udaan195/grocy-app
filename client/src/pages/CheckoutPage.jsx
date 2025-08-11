@@ -293,10 +293,10 @@ const CheckoutPage = () => {
           <input type="radio" value="COD" checked={paymentMethod === 'COD'} readOnly />
           <span>Cash on Delivery</span>
         </div>
-        <div className={`payment-option ${paymentMethod === 'Online' ? 'selected' : ''}`} onClick={() => setPaymentMethod('Online')}>
-          <input type="radio" value="Online" checked={paymentMethod === 'Online'} readOnly />
-          <span>Online Payment</span>
-        </div>
+        <div className={`payment-option disabled`}>
+        <input type="radio" name="payment" value="Online" disabled />
+        <span>Online Payment (Temporarily Unavailable)</span>
+    </div>
       </div>
 
       {/* Coupon */}
