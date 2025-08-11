@@ -73,11 +73,14 @@ const HomePage = ({ searchTerm }) => {
             try {
                 const { lat, lon } = userLocation;
 
-                const productsRes = await axios.get(
-                    `https://grocy-app-server.onrender.com/api/products?lat=${lat}&lon=${lon}&radius=10&category=${selectedCategory}&search=${searchTerm}`
-                );
+                const encodedCategory = encodeURIComponent(selectedCategory);
+                // -----------------------------
 
-                setProducts(productsRes.data);
+                // API कॉल में encodedCategory का इस्तेमाल करें
+                const { data } = await axios.get(
+                    `https://grocy-app-server.onrender.com/api/products?lat=${lat}&lon=${lon}&category=${encodedCategory}&search=${searchTerm}`
+                );
+                setProducts(data);
             } catch (err) {
                 setError('इस क्षेत्र के प्रोडक्ट्स लाने में विफल रहे।');
             } finally {
@@ -85,7 +88,7 @@ const HomePage = ({ searchTerm }) => {
             }
         };
 
-        const debounceTimeout = setTimeout(fetchData, 500);
+        const debounceTimeout = setTimeout(fetchData, 300);
         return () => clearTimeout(debounceTimeout);
     }, [userLocation, selectedCategory, searchTerm]);
 

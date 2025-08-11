@@ -67,6 +67,7 @@ const getProducts = async (req, res) => {
 
        if (category && category.toLowerCase() !== 'all') {
             // केस-इन्सेंसिटिव मैचिंग के लिए रेगुलर एक्सप्रेशन का इस्तेमाल करें
+            // यह 'Dairy & Bakery' और 'dairy & bakery' दोनों को ढूंढेगा
             productFilter.category = { $regex: `^${category}$`, $options: 'i' };
         }
         if (search && search.trim() !== '') {
