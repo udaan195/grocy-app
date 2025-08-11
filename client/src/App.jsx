@@ -39,6 +39,9 @@ import DashboardSummaryPage from './pages/admin/DashboardSummaryPage.jsx';
 import VendorSalesSummaryPage from './pages/admin/VendorSalesSummaryPage.jsx';
 import ForgotPasswordPage from './pages/ForgotPasswordPage.jsx';
 import ResetPasswordPage from './pages/ResetPasswordPage.jsx';
+import AboutUsPage from './pages/AboutUsPage.jsx';
+import ContactUsPage from './pages/ContactUsPage.jsx';
+import FAQPage from './pages/FAQPage.jsx';
 // ===== Route Guards =====
 const ProtectedRoute = ({ children }) => {
     const token = localStorage.getItem('token');
@@ -77,6 +80,9 @@ function App() {
                     {/* Public Routes */}
                     <Route path="/" element={<HomePage searchTerm={searchTerm} />} />
                     <Route path="/product/:id" element={<ProductDetailPage />} />
+                    <Route path="/about" element={<AboutUsPage />} />
+                        <Route path="/contact" element={<ContactUsPage />} />
+                        <Route path="/faq" element={<FAQPage />} />
 
                     {/* Auth Routes */}
                     <Route path="/login" element={token ? <Navigate to="/" /> : <LoginPage />} />
@@ -129,8 +135,4 @@ function App() {
 export default App;
 
 
-// ...
-
-
-// Routes के अंदर
 

@@ -1,0 +1,46 @@
+.static-page-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.static-page-container h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 1rem;
+}
+
+.static-page-container h2 {
+    color: var(--dark-color);
+    margin-top: 2rem;
+}
+
+.static-page-container p {
+    line-height: 1.8;
+    color: #555;
+}
+
+/* FAQ पेज के लिए Accordion स्टाइल */
+.faq-item {
+    border-bottom: 1px solid #eee;
+    padding: 1rem 0;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.faq-answer {
+    margin-top: 1rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--primary-color);
+}
