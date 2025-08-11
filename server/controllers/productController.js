@@ -65,8 +65,13 @@ const getProducts = async (req, res) => {
             ]
         };
 
-        if (category && category.toLowerCase() !== 'all') productFilter.category = category;
-        if (search && search.trim() !== '') productFilter.name = { $regex: search.trim(), $options: 'i' };
+       if (category && category.toLowerCase() !== 'all') {
+            // केस-इन्सेंसिटिव मैचिंग के लिए रेगुलर एक्सप्रेशन का इस्तेमाल करें
+            productFilter.category = { $regex: `^${category}$`, $options: 'i' };
+        }
+        if (search && search.trim() !== '') {
+            productFilter.name = { $regex: search.trim(), $options: 'i' };
+        }
 
         const products = await Product.find(productFilter);
         res.json(products);
