@@ -399,6 +399,5 @@ module.exports = {
     updateOrderStatusByAdmin,
     getAllProducts,
     deleteProductByAdmin, getAdminDashboardSummary, getDashboardStats, getDashboardSummary, getVendorSalesSummary, getVendorWiseSalesSummary, createBanner, deleteBanner, getAllBanners
-    
 };
 
