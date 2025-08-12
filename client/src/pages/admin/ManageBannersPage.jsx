@@ -10,16 +10,17 @@ const ManageBannersPage = () => {
     const [selectedVendor, setSelectedVendor] = useState('');
     const [image, setImage] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [submitting, setSubmitting] = useState(false);
+
     const getToken = () => localStorage.getItem('token');
 
     const fetchData = async () => {
         setLoading(true);
         try {
             const config = { headers: { Authorization: `Bearer ${getToken()}` } };
-            // एक साथ बैनर्स और वेंडर्स दोनों को fetch करें
             const [bannersRes, vendorsRes] = await Promise.all([
                 axios.get('/api/admin/banners', config),
-                axios.get('/api/admin/vendors', config) // वेंडर्स की लिस्ट पाने के लिए
+                axios.get('/api/admin/vendors?status=approved', config) // सिर्फ अप्रूव्ड वेंडर्स लाएं
             ]);
             setBanners(bannersRes.data);
             setVendors(vendorsRes.data);
@@ -36,18 +37,29 @@ const ManageBannersPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!image) {
+            alert('Please select an image file.');
+            return;
+        }
+        setSubmitting(true);
         const formData = new FormData();
         formData.append('title', title);
         formData.append('vendor', selectedVendor);
-        formData.append('image', image);
+        formData.append('image', image); // <-- की (key) का नाम 'image' होना चाहिए
 
         try {
             const config = { headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${getToken()}` } };
             await axios.post('/api/admin/banners', formData, config);
             alert('Banner added successfully!');
-            fetchData(); // <-- सफल होने पर लिस्ट को रिफ्रेश करें
+            fetchData(); // लिस्ट को रिफ्रेश करें
+            // फॉर्म को रीसेट करें
+            setTitle('');
+            setSelectedVendor('');
+            setImage(null);
         } catch (error) {
             alert('Failed to add banner.');
+        } finally {
+            setSubmitting(false);
         }
     };
 
@@ -57,7 +69,7 @@ const ManageBannersPage = () => {
                 const config = { headers: { Authorization: `Bearer ${getToken()}` } };
                 await axios.delete(`/api/admin/banners/${bannerId}`, config);
                 alert('Banner deleted successfully!');
-                fetchData(); // <-- सफल होने पर लिस्ट को रिफ्रेश करें
+                fetchData();
             } catch (error) {
                 alert('Failed to delete banner.');
             }
@@ -68,30 +80,28 @@ const ManageBannersPage = () => {
 
     return (
         <div style={{ padding: '2rem', maxWidth: '900px', margin: 'auto' }}>
-            <h2>Manage Banners</h2>
-            
-            {/* --- नया बैनर बनाने का फॉर्म --- */}
-            <form onSubmit={handleSubmit} style={{ backgroundColor: '#fff', padding: '1.5rem', borderRadius: '8px', marginBottom: '2rem' }}>
-                <h3>Add New Banner</h3>
-                <input type="text" placeholder="Banner Title" onChange={e => setTitle(e.target.value)} required />
-                <select onChange={e => setSelectedVendor(e.target.value)} required>
-                    <option value="">Select Vendor</option>
-                    {vendors.filter(v => v.status === 'approved').map(v => 
-                        <option key={v._id} value={v._id}>{v.shopName}</option>
-                    )}
-                </select>
-                <input type="file" onChange={e => setImage(e.target.files[0])} required />
-                <button type="submit" style={{marginTop: '1rem'}}>Add Banner</button>
-            </form>
+            <div style={{backgroundColor: '#fff', padding: '1.5rem', borderRadius: '8px', marginBottom: '2rem'}}>
+                <h2>Add New Banner</h2>
+                <form onSubmit={handleSubmit} style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
+                    <input type="text" placeholder="Banner Title" value={title} onChange={e => setTitle(e.target.value)} required />
+                    <select value={selectedVendor} onChange={e => setSelectedVendor(e.target.value)} required>
+                        <option value="">-- Select a Vendor --</option>
+                        {vendors.map(v => <option key={v._id} value={v._id}>{v.shopName}</option>)}
+                    </select>
+                    <input type="file" onChange={e => setImage(e.target.files[0])} required />
+                    <button type="submit" disabled={submitting}>
+                        {submitting ? 'Uploading...' : 'Add Banner'}
+                    </button>
+                </form>
+            </div>
 
-            {/* --- मौजूदा बैनर्स की लिस्ट --- */}
             <h3>Existing Banners</h3>
             <div>
-                {banners.length === 0 ? <p>No banners found.</p> :
+                {banners.length === 0 ? <p>No banners created yet.</p> :
                  banners.map(banner => (
                     <div key={banner._id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', backgroundColor: '#f9f9f9', padding: '1rem', borderRadius: '8px', marginBottom: '1rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                            <img src={banner.image} alt={banner.title} style={{ width: '100px', height: '50px', objectFit: 'cover' }} />
+                            <img src={banner.image} alt={banner.title} style={{ width: '120px', height: '60px', objectFit: 'cover', borderRadius: '4px' }} />
                             <div>
                                 <h4>{banner.title}</h4>
                                 <p>For: {banner.vendor?.shopName || 'N/A'}</p>
