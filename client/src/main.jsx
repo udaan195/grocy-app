@@ -6,6 +6,8 @@ import { SocketProvider } from './context/SocketContext.jsx';
 import { CartProvider } from './context/CartContext.jsx';
 import './index.css';
 import axios from 'axios';
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -22,3 +24,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
+
+
+// --- यह दो लाइनें जोड़ें ---
+
+// -------------------------
+
