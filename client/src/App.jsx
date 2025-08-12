@@ -44,6 +44,9 @@ import ResetPasswordPage from './pages/ResetPasswordPage.jsx';
 import AboutUsPage from './pages/AboutUsPage.jsx';
 import ContactUsPage from './pages/ContactUsPage.jsx';
 import FAQPage from './pages/FAQPage.jsx';
+import ManageBannersPage from './pages/admin/ManageBannersPage.jsx';
+// ...
+
 
 // Helper to parse localStorage safely
 const getUserFromStorage = () => {
@@ -127,6 +130,7 @@ function App() {
           <Route path="/admin/vendors" element={<AdminRoute><AdminManageVendorsPage /></AdminRoute>} />
           <Route path="/admin/orders" element={<AdminRoute><AdminManageOrdersPage /></AdminRoute>} />
           <Route path="/admin/products" element={<AdminRoute><AdminManageProductsPage /></AdminRoute>} />
+          <Route path="/admin/manage-banners" element={<AdminRoute><ManageBannersPage /></AdminRoute>} />
           <Route path="/admin/summary" element={<AdminRoute><DashboardSummaryPage /></AdminRoute>} />
           <Route path="/admin/vendor-sales" element={<AdminRoute><VendorSalesSummaryPage /></AdminRoute>} />
 
@@ -141,3 +145,5 @@ function App() {
 }
 
 export default App;
+
+ {/* <-- यह नया राउट है */}

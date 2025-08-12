@@ -2,6 +2,7 @@ const Vendor = require('../models/vendorModel.js');
 const User = require('../models/userModel.js');
 const Order = require('../models/orderModel.js');
 const Product = require('../models/productModel.js');
+const Banner = require('../models/bannerModel.js'); 
 
 
 // @desc    Get all vendors by admin (with optional status filter)
@@ -361,6 +362,34 @@ const getVendorWiseSalesSummary = async (req, res) => {
     }
 };
 
+const createBanner = async (req, res) => {
+    try {
+        if (!req.file) return res.status(400).json({ message: 'Image is required.' });
+        const { title, vendor } = req.body;
+        const newBanner = new Banner({ title, vendor, image: req.file.path });
+        await newBanner.save();
+        res.status(201).json(newBanner);
+    } catch (error) { res.status(500).json({ message: 'Server Error' }); }
+};
+
+const getAllBanners = async (req, res) => {
+    try {
+        const banners = await Banner.find({}).populate('vendor', 'shopName');
+        res.json(banners);
+    } catch (error) { res.status(500).json({ message: 'Server Error' }); }
+};
+
+const deleteBanner = async (req, res) => {
+    try {
+        const banner = await Banner.findById(req.params.id);
+        if (banner) {
+            await banner.deleteOne();
+            res.json({ message: 'Banner removed' });
+        } else {
+            res.status(404).json({ message: 'Banner not found' });
+        }
+    } catch (error) { res.status(500).json({ message: 'Server Error' }); }
+};
 
 
 module.exports = {
@@ -369,6 +398,7 @@ module.exports = {
     getAllOrders,
     updateOrderStatusByAdmin,
     getAllProducts,
-    deleteProductByAdmin, getAdminDashboardSummary, getDashboardStats, getDashboardSummary, getVendorSalesSummary, getVendorWiseSalesSummary
+    deleteProductByAdmin, getAdminDashboardSummary, getDashboardStats, getDashboardSummary, getVendorSalesSummary, getVendorWiseSalesSummary, createBanner, deleteBanner, getAllBanners
     
 };
+

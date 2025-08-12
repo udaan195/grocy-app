@@ -1,14 +1,26 @@
 const mongoose = require('mongoose');
 
 const bannerSchema = new mongoose.Schema({
-  vendor: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  title: { type: String, required: true },
-  image: { type: String, required: true }, // Cloudinary URL
-  createdAt: { type: Date, default: Date.now }
+    title: {
+        type: String,
+        required: true,
+    },
+    image: { // Cloudinary URL
+        type: String,
+        required: true,
+    },
+    vendor: { // यह बैनर किस वेंडर का है
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Vendor',
+        required: true,
+    },
+    isActive: {
+        type: Boolean,
+        default: true,
+    },
+}, {
+    timestamps: true
 });
 
-module.exports = mongoose.model('Banner', bannerSchema);
+const Banner = mongoose.model('Banner', bannerSchema);
+module.exports = Banner;

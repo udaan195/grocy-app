@@ -12,8 +12,9 @@ const {
     getAdminDashboardSummary, 
     getDashboardStats, 
     getVendorSalesSummary, 
-    getVendorWiseSalesSummary  // ✅ New imports
+    getVendorWiseSalesSummary, createBanner, getAllBanners, deleteBanner  // ✅ New imports
 } = require('../controllers/adminController');
+const upload = require('../config/cloudinary.js')
 
 const { protect, isAdmin } = require('../middlewares/authMiddleware');
 
@@ -34,7 +35,11 @@ router.route('/orders/:id/status').put(protect, isAdmin, updateOrderStatusByAdmi
 // 🛒 Product Routes
 router.route('/products').get(protect, isAdmin, getAllProducts);
 router.route('/products/:id').delete(protect, isAdmin, deleteProductByAdmin);
+router.route('/banners').post(protect, isAdmin, upload.single('image'), createBanner).get(protect, isAdmin, getAllBanners);
+router.route('/banners/:id').delete(protect, isAdmin, deleteBanner);
 
 // ✨ Future: Settings Routes...
 
 module.exports = router;
+
+

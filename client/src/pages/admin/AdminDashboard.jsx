@@ -29,6 +29,13 @@ const AdminDashboard = () => {
                         <p>View or delete any product.</p>
                     </div>
                 </Link>
+                <Link to="/admin/manage-banners" className="dashboard-card-link">
+                    <div className="dashboard-card">
+                        <FaImages className="dashboard-card-icon" />
+                        <h3>Manage Banners</h3>
+                        <p>Add or remove promotional banners.</p>
+                    </div>
+                </Link>
                
                 <Link to="/admin/settings" className="dashboard-card-link">
                     <div className="dashboard-card">

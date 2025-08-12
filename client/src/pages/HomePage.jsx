@@ -27,6 +27,7 @@ const NoServiceMessage = () => {
 
 const HomePage = ({ searchTerm }) => {
     const [products, setProducts] = useState([]);
+    const [banners, setBanners] = useState([]); // ✅ बैनर के लिए state
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
@@ -73,14 +74,14 @@ const HomePage = ({ searchTerm }) => {
             try {
                 const { lat, lon } = userLocation;
 
-                const encodedCategory = encodeURIComponent(selectedCategory);
-                // -----------------------------
+                // ✅ प्रोडक्ट्स और बैनर्स एक साथ लाना
+                const [productsRes, bannersRes] = await Promise.all([
+                    axios.get(`https://grocy-app-server.onrender.com/api/products?lat=${lat}&lon=${lon}&category=${encodedCategory}&search=${searchTerm}`),
+                    axios.get(`https://grocy-app-server.onrender.com/api/banners?lat=${lat}&lon=${lon}`)
+                ]);
 
-                // API कॉल में encodedCategory का इस्तेमाल करें
-                const { data } = await axios.get(
-                    `https://grocy-app-server.onrender.com/api/products?lat=${lat}&lon=${lon}&category=${encodedCategory}&search=${searchTerm}`
-                );
-                setProducts(data);
+                setProducts(productsRes.data);
+                setBanners(bannersRes.data);
             } catch (err) {
                 setError('इस क्षेत्र के प्रोडक्ट्स लाने में विफल रहे।');
             } finally {
@@ -118,15 +119,14 @@ const HomePage = ({ searchTerm }) => {
 
     return (
         <div style={pageStyle}>
-            {/* ✅ Banner Slider visible only if userLocation is available */}
-            <BannerSlider userLocation={userLocation} />
+            {/* ✅ बैनर्स हों तभी स्लाइडर दिखे */}
+            {banners.length > 0 && <BannerSlider banners={banners} />}
 
             <div style={{ position: 'sticky', top: '70px', zIndex: 998, backgroundColor: '#eef2f5', paddingBottom: '1px' }}>
                 <CategoryScroller
                     selectedCategory={selectedCategory}
                     onSelectCategory={setSelectedCategory}
                 />
-                
             </div>
 
             <div style={mainContentStyle}>
