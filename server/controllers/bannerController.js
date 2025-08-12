@@ -35,4 +35,5 @@ const BannerSlider = ({ banners }) => {
     );
 };
 
-export default BannerSlider;
+// ✅ CommonJS export
+module.exports = BannerSlider;
