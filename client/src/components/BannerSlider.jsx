@@ -4,34 +4,32 @@ import './BannerSlider.css';
 
 const BannerSlider = ({ location }) => {
   const [banners, setBanners] = useState([]);
-  const [loading, setLoading] = useState(true); // 🔹 Loading state
-  const [error, setError] = useState(null); // 🔹 Error state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log("📍 BannerSlider mounted. Location:", location);
+    console.log("📍 BannerSlider mounted. Location prop:", location);
 
-    if (!location || !location.lat || !location.lon) {
-      console.warn("⚠ Location not available yet. Skipping banner fetch.");
+    if (!location) {
+      console.warn("⚠️ Location missing. Banners fetch skipped.");
       setLoading(false);
       return;
     }
 
     const fetchBanners = async () => {
       try {
-        console.log(`🌐 Fetching banners for lat=${location.lat}, lon=${location.lon}`);
-        const res = await axios.get(`/api/banners?lat=${location.lat}&lon=${location.lon}`);
-
-        console.log("✅ API Response:", res.data);
+        console.log(`🔄 Fetching banners for lat=${location.lat}, lon=${location.lon}`);
+        const res = await axios.get(
+          `/api/banners?lat=${location.lat}&lon=${location.lon}`
+        );
+        console.log("📢 API Response:", res.data);
 
         if (Array.isArray(res.data) && res.data.length > 0) {
           setBanners(res.data);
-          console.log(`🎯 Loaded ${res.data.length} banners`);
         } else {
-          console.warn("⚠ No banners received from API.");
+          console.warn("⚠️ API returned empty banners array.");
         }
-      } catch (err) {
-        console.error("❌ Error fetching banners:", err);
-        setError(err.message || "Failed to fetch banners");
+      } catch (error) {
+        console.error('❌ Error fetching banners:', error);
       } finally {
         setLoading(false);
       }
@@ -41,27 +39,27 @@ const BannerSlider = ({ location }) => {
   }, [location]);
 
   if (loading) {
-    return <p style={{ textAlign: "center" }}>⏳ Loading banners...</p>;
-  }
-
-  if (error) {
-    return <p style={{ textAlign: "center", color: "red" }}>⚠ {error}</p>;
+    return <div>⏳ Loading banners...</div>;
   }
 
   if (!banners.length) {
-    return <p style={{ textAlign: "center" }}>ℹ No banners available.</p>;
+    return <div>🚫 No banner available</div>;
   }
 
   return (
     <div className="banner-slider">
-      {banners.map((banner) => (
-        <img
-          key={banner._id || banner.imageUrl}
-          src={banner.imageUrl}
-          alt="Vendor Banner"
-          className="banner-image"
-        />
-      ))}
+      {banners.map((banner) => {
+        console.log("🖼 Rendering banner:", banner);
+        return (
+          <img
+            key={banner._id || Math.random()}
+            src={banner.imageUrl}
+            alt="Vendor Banner"
+            className="banner-image"
+            onError={() => console.error(`❌ Failed to load image: ${banner.imageUrl}`)}
+          />
+        );
+      })}
     </div>
   );
 };
