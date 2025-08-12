@@ -1,5 +1,5 @@
-import React from 'react';
-import Slider from 'react-slick';
+const React = require('react');
+const Slider = require('react-slick');
 
 const BannerSlider = ({ banners }) => {
     const settings = {
@@ -35,5 +35,4 @@ const BannerSlider = ({ banners }) => {
     );
 };
 
-// ✅ CommonJS export
 module.exports = BannerSlider;
