@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaUsers, FaClipboardList, FaBoxOpen, FaCog, FaImage, FaChartBar} from 'react-icons/fa';
+import { FaUsers, FaClipboardList, FaBoxOpen, FaCog, FaImages, FaChartBar} from 'react-icons/fa';
 import './AdminDashboard.css'; // <-- नई CSS फाइल
 
 const AdminDashboard = () => {
