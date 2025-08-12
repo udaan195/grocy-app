@@ -1,38 +1,48 @@
-const React = require('react');
-const Slider = require('react-slick');
+// require() का इस्तेमाल करें
+const Banner = require('../models/bannerModel.js');
+const Vendor = require('../models/vendorModel.js');
 
-const BannerSlider = ({ banners }) => {
-    const settings = {
-        dots: true,
-        infinite: banners.length > 1, // अगर 1 से ज़्यादा बैनर हैं तभी स्लाइड करें
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        arrows: false
-    };
+// @desc    Get active banners based on location
+// @route   GET /api/banners
+// @access  Public
+const getActiveBanners = async (req, res) => {
+    try {
+        const { lat, lon } = req.query;
+        if (!lat || !lon) {
+            return res.json([]);
+        }
 
-    // अगर कोई बैनर नहीं है, तो कुछ भी न दिखाएं
-    if (!banners || banners.length === 0) {
-        return null;
+        const maxRadius = 50 * 1000; // 50km
+
+        const nearbyVendors = await Vendor.find({
+            location: {
+                $nearSphere: {
+                    $geometry: { type: 'Point', coordinates: [parseFloat(lon), parseFloat(lat)] },
+                    $maxDistance: maxRadius
+                }
+            },
+            status: 'approved'
+        }).select('_id');
+        
+        if (nearbyVendors.length === 0) {
+            return res.json([]);
+        }
+
+        const vendorIds = nearbyVendors.map(v => v._id);
+
+        const banners = await Banner.find({ 
+            vendor: { $in: vendorIds }, 
+            isActive: true 
+        });
+
+        res.json(banners);
+    } catch (error) {
+        console.error("Get Banners Error:", error);
+        res.status(500).json({ message: 'Server Error' });
     }
-
-    return (
-        <div style={{ margin: '1rem 0.75rem' }}>
-            <Slider {...settings}>
-                {banners.map(banner => (
-                    <div key={banner._id}>
-                        <img 
-                            src={banner.image} 
-                            alt={banner.title} 
-                            style={{ width: '100%', height: '150px', objectFit: 'cover', borderRadius: '12px' }} 
-                        />
-                    </div>
-                ))}
-            </Slider>
-        </div>
-    );
 };
 
-module.exports = BannerSlider;
+// module.exports का इस्तेमाल करें
+module.exports = { 
+    getActiveBanners 
+};
